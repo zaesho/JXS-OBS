@@ -1,0 +1,6 @@
+[submodule "SVT-JPEG-XS"]
+	path = SVT-JPEG-XS
+	url = https://github.com/OpenVisualCloud/SVT-JPEG-XS.git
+[submodule "obs-studio"]
+	path = obs-studio
+	url = https://github.com/obsproject/obs-studio.git
