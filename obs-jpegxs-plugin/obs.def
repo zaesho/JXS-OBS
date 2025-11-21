@@ -1,0 +1,93 @@
+LIBRARY obs
+EXPORTS
+    ; Logging functions
+    blog
+    blogva
+    
+    ; Registration functions
+    obs_register_source_s
+    obs_register_output_s
+    
+    ; Module lifecycle
+    obs_module_set_info
+    obs_module_ver
+    
+    ; Data access functions
+    obs_data_get_string
+    obs_data_get_int
+    obs_data_get_bool
+    obs_data_get_double
+    obs_data_set_default_string
+    obs_data_set_default_int
+    obs_data_set_default_bool
+    obs_data_set_default_double
+    obs_data_set_string
+    obs_data_set_int
+    obs_data_set_double
+    obs_data_release
+    
+    ; Properties functions
+    obs_properties_create
+    obs_properties_add_text
+    obs_properties_add_int
+    obs_properties_add_float
+    obs_properties_add_bool
+    obs_properties_add_list
+    obs_property_list_add_string
+    obs_property_list_add_int
+    obs_properties_get
+    obs_property_set_modified_callback
+    obs_property_set_visible
+    
+    ; Output functions
+    obs_output_video
+    obs_output_audio
+    obs_output_get_video_conversion
+    obs_output_set_video_conversion
+    obs_output_get_audio_conversion
+    obs_get_video_info
+    obs_get_audio_info
+    
+    ; Video functions
+    video_output_get_info
+    video_output_get_frame_rate
+    
+    ; Text lookup (localization)
+    text_lookup_getstr
+    text_lookup
+    text_lookup_destroy
+    obs_module_load_locale
+    obs_module_free_locale
+    obs_module_set_locale
+    
+    ; Source functions
+    obs_source_update
+    obs_source_get_settings
+    obs_source_output_video
+    
+    ; Encoder functions (if needed)
+    obs_encoder_create
+    obs_encoder_destroy
+    
+    ; Output management functions
+    obs_output_create
+    obs_output_destroy
+    obs_output_release
+    obs_output_start
+    obs_output_stop
+    obs_output_active
+    obs_output_get_settings
+    obs_output_update
+    obs_output_set_media
+    obs_output_get_total_frames
+    obs_output_get_frames_dropped
+    obs_output_begin_data_capture
+    obs_output_end_data_capture
+    
+    ; Core video/audio access
+    obs_get_video
+    obs_get_audio
+    obs_data_create
+    
+    ; OS functions
+    os_gettime_ns

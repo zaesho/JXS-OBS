@@ -13,21 +13,20 @@ OBS_MODULE_USE_DEFAULT_LOCALE("obs-jpegxs-input", "en-US")
 
 bool obs_module_load(void)
 {
-    blog(LOG_INFO, "[JPEG XS] Decoder plugin version %s loading...", OBS_PLUGIN_VERSION);
+    // MINIMAL VERSION - no logging, no complex operations
+    // Just register the source
     
-    // Register the JPEG XS source
-    struct obs_source_info jpegxs_source_info = {};
+    // Register the JPEG XS source (MUST be static so it persists after function returns!)
+    static struct obs_source_info jpegxs_source_info = {};
     register_jpegxs_source(&jpegxs_source_info);
     obs_register_source(&jpegxs_source_info);
-    
-    blog(LOG_INFO, "[JPEG XS] JPEG XS decoder source registered successfully");
     
     return true;
 }
 
 void obs_module_unload(void)
 {
-    blog(LOG_INFO, "[JPEG XS] Decoder plugin unloading...");
+    // MINIMAL VERSION - no logging
 }
 
 MODULE_EXPORT const char *obs_module_description(void)

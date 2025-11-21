@@ -1,6 +1,6 @@
 # OBS JPEG XS Plugin - Development Documentation
 
-**Project Status:** Plugin skeleton built successfully on macOS ARM64. Ready for Windows x86_64 development.
+**Project Status:** ✅ **FULLY FUNCTIONAL on Windows x86_64** - Encoder and decoder complete with SVT-JPEG-XS integration
 
 **Last Updated:** November 17, 2025
 
@@ -301,9 +301,9 @@ static void receive_loop(jpegxs_source *context) {
 ### macOS ARM64 (Current Development)
 - ✅ Plugins built as `.bundle` files (Mach-O bundles)
 - ✅ libsrt installed via Homebrew: `/opt/homebrew/Cellar/srt/1.5.4`
-- ✅ SIMDE library required for x86 intrinsics emulation: `brew install simde`
-- ❌ SVT-JPEG-XS cannot build natively (x86 intrinsics incompatible with Apple Clang 16)
-- ⚠️ Plugins are skeleton only - need x86_64 system for actual JPEG XS codec
+- ✅ SVT-JPEG-XS builds natively (Patched for C-fallback mode)
+- ⚠️ Performance is lower than x86 (using C implementation instead of ASM)
+- ✅ Plugin architecture fully supported
 
 ### Windows x86_64 (RECOMMENDED FOR NEXT PHASE)
 **Why Windows?**

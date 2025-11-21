@@ -1,0 +1,596 @@
+15:47:54.260: [Safe Mode] Unclean shutdown detected!
+15:47:57.648: [Safe Mode] User elected to launch normally.
+15:47:57.648: CPU Name: AMD Ryzen 9 7945HX with Radeon Graphics        
+15:47:57.648: CPU Speed: 2495MHz
+15:47:57.648: Physical Cores: 16, Logical Cores: 32
+15:47:57.648: Physical Memory: 95956MB Total, 64764MB Free
+15:47:57.648: Windows Version: 10.0 Build 26100 (release: 24H2; revision: 7171; 64-bit)
+15:47:57.648: Running as administrator: false
+15:47:57.648: Windows 10/11 Gaming Features:
+15:47:57.648: 	Game DVR: On
+15:47:57.648: 	Game Mode: Off
+15:47:57.652: Sec. Software Status:
+15:47:57.654: 	Microsoft Defender Antivirus: enabled (AV)
+15:47:57.654: 	Windows Firewall: enabled (FW)
+15:47:57.655: Current Date/Time: 2025-11-20, 15:47:57
+15:47:57.655: Browser Hardware Acceleration: true
+15:47:57.655: Hide OBS windows from screen capture: false
+15:47:57.655: Qt Version: 6.6.3 (runtime), 6.6.3 (compiled)
+15:47:57.655: Portable mode: false
+15:47:57.740: OBS 31.0.2 (64-bit, windows)
+15:47:57.740: ---------------------------------
+15:47:57.789: ---------------------------------
+15:47:57.789: audio settings reset:
+15:47:57.789: 	samples per sec: 48000
+15:47:57.789: 	speakers:        2
+15:47:57.789: 	max buffering:   960 milliseconds
+15:47:57.789: 	buffering type:  dynamically increasing
+15:47:57.791: ---------------------------------
+15:47:57.791: Initializing D3D11...
+15:47:57.791: Available Video Adapters: 
+15:47:57.807: 	Adapter 0: NVIDIA GeForce RTX 3090
+15:47:57.807: 	  Dedicated VRAM: 25507659776 (23.8 GiB)
+15:47:57.807: 	  Shared VRAM:    50308845568 (46.9 GiB)
+15:47:57.807: 	  PCI ID:         10de:2204
+15:47:57.807: 	  HAGS Status:    Enabled (Default: No, Driver status: Supported)
+15:47:57.808: 	  Driver Version: 32.0.15.8115
+15:47:57.808: 	  output 0:
+15:47:57.808: 	    name=Odyssey G70B
+15:47:57.808: 	    pos={0, 0}
+15:47:57.808: 	    size={1920, 1080}
+15:47:57.808: 	    attached=true
+15:47:57.808: 	    refresh=60
+15:47:57.808: 	    bits_per_color=8
+15:47:57.808: 	    space=RGB_FULL_G22_NONE_P709
+15:47:57.808: 	    primaries=[r=(0.675781, 0.315430), g=(0.269531, 0.630859), b=(0.146484, 0.057617), wp=(0.313477, 0.329102)]
+15:47:57.808: 	    relative_gamut_area=[709=1.212371, P3=0.893725, 2020=0.641187]
+15:47:57.808: 	    sdr_white_nits=80
+15:47:57.808: 	    nit_range=[min=0.010000, max=400.000000, max_full_frame=320.000000]
+15:47:57.808: 	    dpi=96 (100%)
+15:47:57.808: 	    id=\\?\DISPLAY#SAM7232#5&2987d1c0&0&UID4353#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}
+15:47:57.808: 	    alt_id=\\.\DISPLAY1
+15:47:57.808: 	Adapter 1: AMD Radeon(TM) 610M
+15:47:57.808: 	  Dedicated VRAM: 2119995392 (2.0 GiB)
+15:47:57.808: 	  Shared VRAM:    50308845568 (46.9 GiB)
+15:47:57.808: 	  PCI ID:         1002:164e
+15:47:57.808: 	  HAGS Status:    Disabled (Default: No, Driver status: Unsupported)
+15:47:57.808: 	  Driver Version: 32.0.21030.2001
+15:47:57.808: 	  output 0:
+15:47:57.808: 	    name=KB272 G0
+15:47:57.808: 	    pos={0, -1080}
+15:47:57.808: 	    size={1920, 1080}
+15:47:57.808: 	    attached=true
+15:47:57.808: 	    refresh=60
+15:47:57.808: 	    bits_per_color=10
+15:47:57.808: 	    space=RGB_FULL_G22_NONE_P709
+15:47:57.808: 	    primaries=[r=(0.646484, 0.346680), g=(0.322266, 0.629883), b=(0.155273, 0.060547), wp=(0.313477, 0.329102)]
+15:47:57.808: 	    relative_gamut_area=[709=1.034726, P3=0.762770, 2020=0.547236]
+15:47:57.808: 	    sdr_white_nits=80
+15:47:57.808: 	    nit_range=[min=0.500000, max=270.000000, max_full_frame=270.000000]
+15:47:57.808: 	    dpi=96 (100%)
+15:47:57.808: 	    id=\\?\DISPLAY#ACR0E26#5&1388d2d&0&UID520#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}
+15:47:57.808: 	    alt_id=\\.\DISPLAY5
+15:47:57.808: 	Adapter 2: NVIDIA GeForce RTX 3090
+15:47:57.808: 	  Dedicated VRAM: 25507659776 (23.8 GiB)
+15:47:57.808: 	  Shared VRAM:    50308845568 (46.9 GiB)
+15:47:57.808: 	  PCI ID:         10de:2204
+15:47:57.808: 	  HAGS Status:    Enabled (Default: No, Driver status: Supported)
+15:47:57.809: 	  Driver Version: 32.0.15.8115
+15:47:57.809: Loading up D3D11 on adapter NVIDIA GeForce RTX 3090 (0)
+15:47:57.930: D3D11 loaded successfully, feature level used: b000
+15:47:57.930: DXGI increase maximum frame latency success
+15:47:57.930: Hardware-Accelerated GPU Scheduling enabled on adapter!
+15:47:57.930: D3D11 GPU priority setup failed (not admin?)
+15:47:58.638: ---------------------------------
+15:47:58.638: video settings reset:
+15:47:58.638: 	base resolution:   1920x1080
+15:47:58.638: 	output resolution: 1920x1080
+15:47:58.638: 	downscale filter:  Bicubic
+15:47:58.638: 	fps:               60/1
+15:47:58.638: 	format:            NV12
+15:47:58.638: 	YUV mode:          Rec. 709/Partial
+15:47:58.639: NV12 texture support enabled
+15:47:58.639: P010 texture support not available
+15:47:58.640: Audio monitoring device:
+15:47:58.640: 	name: Default
+15:47:58.640: 	id: default
+15:47:58.648: ---------------------------------
+15:47:58.654: No AJA devices found, skipping loading AJA UI plugin
+15:47:58.654: Failed to initialize module 'aja-output-ui.dll'
+15:47:58.661: No AJA devices found, skipping loading AJA plugin
+15:47:58.661: Failed to initialize module 'aja.dll'
+15:47:58.661: Skipping module '../../obs-plugins/64bit/chrome_elf.dll', not an OBS plugin
+15:47:58.668: [CoreAudio encoder]: CoreAudio AAC encoder not installed on the system or couldn't be loaded
+15:47:58.669: Failed to load 'en-US' text for module: 'decklink-captions.dll'
+15:47:58.670: Failed to load 'en-US' text for module: 'decklink-output-ui.dll'
+15:47:58.677: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+15:47:58.677: Failed to initialize module 'decklink.dll'
+15:47:58.696: Skipping module '../../obs-plugins/64bit/libcef.dll', not an OBS plugin
+15:47:58.697: Skipping module '../../obs-plugins/64bit/libEGL.dll', not an OBS plugin
+15:47:58.697: Skipping module '../../obs-plugins/64bit/libGLESv2.dll', not an OBS plugin
+15:47:59.707: [NVIDIA Audio Effects:] NVIDIA denoiser disabled, redistributable not found or could not be loaded.
+15:47:59.708: Failed to get NVVideoEffects.dll version info size
+15:47:59.708: [NVIDIA VIDEO FX]: FX disabled, redistributable not found or could not be loaded.
+15:47:59.727: [obs-browser]: Version 2.24.5
+15:47:59.727: [obs-browser]: CEF Version 127.0.6533.120 (runtime), 127.145.7+g2b7d20b+chromium-127.0.6533.120 (compiled)
+15:47:59.912: Failed to load 'en-US' text for module: 'obs-jpegxs-input.dll'
+15:47:59.913: Failed to load 'en-US' text for module: 'obs-jpegxs-output.dll'
+15:47:59.913: [JPEG XS Output] Plugin loading...
+15:47:59.920: [JPEG XS Output] Dock 'jpegxs_dock' added successfully
+15:47:59.920: [JPEG XS Output] Plugin loaded successfully
+15:48:00.062: [obs-nvenc] NVENC version: 12.2 (compiled) / 13.0 (driver), CUDA driver version: 13.0, AV1 supported: false
+15:48:00.148: [obs-websocket] [obs_module_load] you can haz websockets (Version: 5.5.5 | RPC Version: 1)
+15:48:00.148: [obs-websocket] [obs_module_load] Qt version (compile-time): 6.6.3 | Qt version (run-time): 6.6.3
+15:48:00.148: [obs-websocket] [obs_module_load] Linked ASIO Version: 103100
+15:48:00.148: DEPRECATION: obs_frontend_get_global_config is deprecated. Read from global or user configuration explicitly instead.
+15:48:00.157: [obs-websocket] [obs_module_load] Module loaded.
+15:48:00.188: [vlc-video]: Couldn't find VLC installation, VLC video source disabled
+15:48:00.268: <StreamDeck> Plugin version 5.5.3.1
+15:48:00.268: ---------------------------------
+15:48:00.268:   Loaded Modules:
+15:48:00.268:     StreamDeckPlugin.dll
+15:48:00.268:     win-wasapi.dll
+15:48:00.268:     win-dshow.dll
+15:48:00.268:     win-capture.dll
+15:48:00.268:     vlc-video.dll
+15:48:00.268:     text-freetype2.dll
+15:48:00.268:     rtmp-services.dll
+15:48:00.268:     obs-x264.dll
+15:48:00.268:     obs-websocket.dll
+15:48:00.268:     obs-webrtc.dll
+15:48:00.268:     obs-vst.dll
+15:48:00.268:     obs-transitions.dll
+15:48:00.268:     obs-text.dll
+15:48:00.268:     obs-qsv11.dll
+15:48:00.268:     obs-outputs.dll
+15:48:00.268:     obs-nvenc.dll
+15:48:00.268:     obs-jpegxs-output.dll
+15:48:00.268:     obs-jpegxs-input.dll
+15:48:00.268:     obs-filters.dll
+15:48:00.268:     obs-ffmpeg.dll
+15:48:00.268:     obs-browser.dll
+15:48:00.268:     nv-filters.dll
+15:48:00.268:     logi_obs_plugin_x64.dll
+15:48:00.268:     image-source.dll
+15:48:00.268:     frontend-tools.dll
+15:48:00.268:     decklink-output-ui.dll
+15:48:00.268:     decklink-captions.dll
+15:48:00.268:     coreaudio-encoder.dll
+15:48:00.268: ---------------------------------
+15:48:00.268: [obs-websocket] [obs_module_post_load] WebSocket server is enabled, starting...
+15:48:00.268: [obs-websocket] [WebSocketServer::Start] Not locked to IPv4 bindings
+15:48:00.268: <StreamDeck> [Server] Listening on '127.0.0.1:28186'.
+15:48:00.269: [obs-websocket] [WebSocketServer::ServerRunner] IO thread started.
+15:48:00.272: [obs-websocket] [WebSocketServer::Start] Server started successfully on port 4455. Possible connect address: 10.2.0.235
+15:48:00.272: ---------------------------------
+15:48:00.272: Available Encoders:
+15:48:00.272:   Video Encoders:
+15:48:00.272: 	- ffmpeg_svt_av1 (SVT-AV1)
+15:48:00.272: 	- ffmpeg_aom_av1 (AOM AV1)
+15:48:00.272: 	- h264_texture_amf (AMD HW H.264 (AVC))
+15:48:00.272: 	- h265_texture_amf (AMD HW H.265 (HEVC))
+15:48:00.272: 	- obs_nvenc_h264_tex (NVIDIA NVENC H.264)
+15:48:00.272: 	- obs_nvenc_hevc_tex (NVIDIA NVENC HEVC)
+15:48:00.272: 	- obs_x264 (x264)
+15:48:00.272:   Audio Encoders:
+15:48:00.272: 	- ffmpeg_aac (FFmpeg AAC)
+15:48:00.272: 	- ffmpeg_opus (FFmpeg Opus)
+15:48:00.272: 	- ffmpeg_pcm_s16le (FFmpeg PCM (16-bit))
+15:48:00.272: 	- ffmpeg_pcm_s24le (FFmpeg PCM (24-bit))
+15:48:00.272: 	- ffmpeg_pcm_f32le (FFmpeg PCM (32-bit float))
+15:48:00.272: 	- ffmpeg_alac (FFmpeg ALAC (24-bit))
+15:48:00.272: 	- ffmpeg_flac (FFmpeg FLAC (16-bit))
+15:48:00.272: ==== Startup complete ===============================================
+15:48:00.279: Switched to Preview/Program mode
+15:48:00.279: ------------------------------------------------
+15:48:00.394: All scene data cleared
+15:48:00.394: ------------------------------------------------
+15:48:00.422: [JPEG XS] Creating source instance
+15:48:00.422: [JPEG XS] Settings updated: URL 'srt://0.0.0.0:9000', Host '0.0.0.0', Port 9000, Latency 20 ms, Threads 0
+15:48:00.427: Switched to scene 'Scene 2'
+15:48:00.427: User switched Program to scene 'Scene 2'
+15:48:00.431: ------------------------------------------------
+15:48:00.431: Loaded scenes:
+15:48:00.431: - scene 'Scene 2':
+15:48:00.431:     - source: 'Video Capture Device' (dshow_input)
+15:48:00.431: - scene 'timertest':
+15:48:00.431:     - source: 'Browser' (browser_source)
+15:48:00.431: - scene 'Scene 3':
+15:48:00.431:     - source: 'JPEG XS Source (RTP/SRT)' (jpegxs_source)
+15:48:00.431: ------------------------------------------------
+15:48:01.155: ---------------------------------
+15:48:01.157: [DShow Device: 'Video Capture Device'] settings updated: 
+15:48:01.157: 	video device: vMix Video
+15:48:01.157: 	video path: 
+15:48:01.157: 	resolution: 1920x1080
+15:48:01.157: 	flip: 0
+15:48:01.157: 	fps: 59.94 (interval: 166833)
+15:48:01.157: 	format: UYVY
+15:48:01.157: 	buffering: disabled
+15:48:01.157: 	hardware decode: disabled
+15:48:01.558: 	using video device audio: no
+15:48:01.558: 	audio device: vMix Audio
+15:48:01.558: 	sample rate: 48000
+15:48:01.558: 	channels: 2
+15:48:01.558: 	audio type: Capture
+15:48:03.527: User switched to scene 'timertest'
+15:48:04.044: User switched to scene 'Scene 3'
+15:48:04.059: [JPEG XS] Starting source
+15:48:04.059: [JPEG XS] Source started
+15:48:04.059: [JPEG XS] Receive thread started
+15:48:05.260: User switched to scene 'timertest'
+15:48:05.275: [JPEG XS] Stopping source
+15:48:05.365: [JPEG XS] Receive thread stopped
+15:48:05.365: [JPEG XS] Source stopped
+15:48:06.946: User switched Program to scene 'timertest'
+15:48:06.961: User switched to scene 'Scene 2'
+15:48:08.678: User switched to scene 'timertest'
+15:48:16.560: User switched Program to scene 'timertest'
+15:48:17.777: User switched to scene 'Scene 3'
+15:48:17.792: [JPEG XS] Starting source
+15:48:17.792: [JPEG XS] Source started
+15:48:17.793: [JPEG XS] Receive thread started
+15:48:19.326: [JPEG XS] Creating output instance
+15:48:19.326: [JPEG XS] Settings updated: srt://127.0.0.1:9000?mode=caller, Ratio 10.0:1, latency 20 ms
+15:48:19.326: [JPEG XS UI] Media set to main video/audio
+15:48:19.326: [JPEG XS] Starting output stream
+15:48:19.326: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:48:19.326: [JPEG XS] Bitrate: 0.00 Mbps
+15:48:19.326: [JPEG XS] SRT URL: srt://127.0.0.1:9000?mode=caller
+15:48:19.326: [JPEG XS] Calculated Bitrate: 199.07 Mbps (Ratio 10.0:1 from 1990.66 Mbps)
+15:48:19.326: [JPEG XS] Video conversion set to I420
+15:48:19.328: [JPEG XS] Decoder Connected to SRT stream
+15:48:19.328: [JPEG XS] Encoder Connected to SRT destination
+15:48:19.329: [JPEG XS] Output stream started successfully
+15:48:19.329: [JPEG XS] Data capture started - waiting for frames...
+15:48:19.329: [JPEG XS UI] Stream started
+15:48:19.360: [JPEG XS] raw_video callback received frame
+15:48:19.364: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:19.364: [JPEG XS] Frame 1: Encoded 414720 bytes, 297 packets
+15:48:19.377: [JPEG XS] raw_video callback received frame
+15:48:19.380: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:19.380: [JPEG XS] Frame 2: Encoded 414720 bytes, 297 packets
+15:48:19.381: [JPEG XS] raw_audio callback received frame
+15:48:19.386: [JpegXSDecoder] Init Frame Bytes: FF 10 FF 50 00 04 08 80 (Size: 414720)
+15:48:19.386: [JpegXSDecoder] Initialized: 1920x1080, 8 bits, Format: 2
+15:48:19.393: [JPEG XS] raw_video callback received frame
+15:48:19.396: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:19.397: [JPEG XS] Frame 3: Encoded 414720 bytes, 297 packets
+15:48:19.400: [JPEG XS] Decoded frame 1, Size: 414720 bytes
+15:48:19.410: [JPEG XS] raw_video callback received frame
+15:48:19.412: [JPEG XS] Decoded frame 2, Size: 414720 bytes
+15:48:19.413: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:19.413: [JPEG XS] Frame 4: Encoded 414720 bytes, 297 packets
+15:48:19.426: [JPEG XS] raw_video callback received frame
+15:48:19.428: [JPEG XS] Decoded frame 3, Size: 414720 bytes
+15:48:19.430: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:19.447: [JPEG XS] Decoded frame 4, Size: 414720 bytes
+15:48:20.343: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:20.344: [JPEG XS] Stopping output stream
+15:48:20.344: Output 'JPEG XS Stream': stopping
+15:48:20.344: Output 'JPEG XS Stream': Total frames output: 59
+15:48:20.344: Output 'JPEG XS Stream': Total drawn frames: 61
+15:48:20.344: [JPEG XS] Data capture stopped
+15:48:20.344: [JPEG XS] Total frames: 60, Dropped: 0
+15:48:20.344: [JPEG XS] Decoder Disconnected: Receive failed: Connection was broken
+15:48:20.346: [JPEG XS] Failed to send packet via SRT
+15:48:20.346: [JPEG XS] Frame 60: Encoded 414720 bytes, 297 packets
+15:48:20.357: [JPEG XS] Output stream stopped
+15:48:20.357: [JPEG XS] Destroying output instance
+15:48:20.357: [JPEG XS UI] Stream stopped
+15:48:42.748: [JPEG XS] Creating output instance
+15:48:42.748: [JPEG XS] Settings updated: srt://172.25.33.162:9000?mode=caller, Ratio 10.0:1, latency 20 ms
+15:48:42.748: [JPEG XS UI] Media set to main video/audio
+15:48:42.748: [JPEG XS] Starting output stream
+15:48:42.748: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:48:42.748: [JPEG XS] Bitrate: 0.00 Mbps
+15:48:42.748: [JPEG XS] SRT URL: srt://172.25.33.162:9000?mode=caller
+15:48:42.748: [JPEG XS] Calculated Bitrate: 199.07 Mbps (Ratio 10.0:1 from 1990.66 Mbps)
+15:48:42.748: [JPEG XS] Video conversion set to I420
+15:48:42.751: [JPEG XS] Decoder Connected to SRT stream
+15:48:42.751: [JPEG XS] Encoder Connected to SRT destination
+15:48:42.751: [JPEG XS] Output stream started successfully
+15:48:42.751: [JPEG XS] Data capture started - waiting for frames...
+15:48:42.752: [JPEG XS UI] Stream started
+15:48:42.780: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:42.781: [JPEG XS] Frame 1: Encoded 414720 bytes, 297 packets
+15:48:42.797: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:42.797: [JPEG XS] Frame 2: Encoded 414720 bytes, 297 packets
+15:48:42.815: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:42.815: [JPEG XS] Frame 3: Encoded 414720 bytes, 297 packets
+15:48:42.829: [JPEG XS] Decoded frame 60, Size: 414720 bytes
+15:48:42.830: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:42.830: [JPEG XS] Frame 4: Encoded 414720 bytes, 297 packets
+15:48:42.847: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:48:43.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:43.763: [JPEG XS] Frame 60: Encoded 414720 bytes, 297 packets
+15:48:43.829: [JPEG XS] Decoded frame 120, Size: 414720 bytes
+15:48:44.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:44.763: [JPEG XS] Frame 120: Encoded 414720 bytes, 297 packets
+15:48:44.829: [JPEG XS] Decoded frame 180, Size: 414720 bytes
+15:48:45.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:45.763: [JPEG XS] Frame 180: Encoded 414720 bytes, 297 packets
+15:48:45.829: [JPEG XS] Decoded frame 240, Size: 414720 bytes
+15:48:46.467: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:48:46.468: [JPEG XS] Failed to decode frame 278
+15:48:46.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:46.763: [JPEG XS] Frame 240: Encoded 414720 bytes, 297 packets
+15:48:46.846: [JPEG XS] Decoded frame 300, Size: 414720 bytes
+15:48:47.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:47.763: [JPEG XS] Frame 300: Encoded 414720 bytes, 297 packets
+15:48:47.846: [JPEG XS] Decoded frame 360, Size: 414720 bytes
+15:48:48.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:48.763: [JPEG XS] Frame 360: Encoded 414720 bytes, 297 packets
+15:48:48.845: [JPEG XS] Decoded frame 420, Size: 414720 bytes
+15:48:49.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:49.764: [JPEG XS] Frame 420: Encoded 414720 bytes, 297 packets
+15:48:49.846: [JPEG XS] Decoded frame 480, Size: 414720 bytes
+15:48:50.151: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:48:50.151: [JPEG XS] Failed to decode frame 498
+15:48:50.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:50.763: [JPEG XS] Frame 480: Encoded 414720 bytes, 297 packets
+15:48:50.861: [JPEG XS] Decoded frame 540, Size: 414720 bytes
+15:48:51.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:51.763: [JPEG XS] Frame 540: Encoded 414720 bytes, 297 packets
+15:48:51.862: [JPEG XS] Decoded frame 600, Size: 414720 bytes
+15:48:52.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:52.763: [JPEG XS] Frame 600: Encoded 414720 bytes, 297 packets
+15:48:52.863: [JPEG XS] Decoded frame 660, Size: 414720 bytes
+15:48:53.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:53.763: [JPEG XS] Frame 660: Encoded 414720 bytes, 297 packets
+15:48:53.818: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:48:53.819: [JPEG XS] Failed to decode frame 717
+15:48:53.877: [JPEG XS] Decoded frame 720, Size: 414720 bytes
+15:48:54.759: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:54.763: [JPEG XS] Frame 720: Encoded 414720 bytes, 297 packets
+15:48:54.879: [JPEG XS] Decoded frame 780, Size: 414720 bytes
+15:48:55.760: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:55.763: [JPEG XS] Frame 780: Encoded 414720 bytes, 297 packets
+15:48:55.877: [JPEG XS] Decoded frame 840, Size: 414720 bytes
+15:48:56.759: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:48:56.763: [JPEG XS] Frame 840: Encoded 414720 bytes, 297 packets
+15:48:56.879: [JPEG XS] Decoded frame 900, Size: 414720 bytes
+15:48:57.502: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:48:57.503: [JPEG XS] Failed to decode frame 937
+15:48:57.549: [JPEG XS] Stopping output stream
+15:48:57.549: Output 'JPEG XS Stream': stopping
+15:48:57.549: Output 'JPEG XS Stream': Total frames output: 887
+15:48:57.549: Output 'JPEG XS Stream': Total drawn frames: 888
+15:48:57.549: [JPEG XS] Data capture stopped
+15:48:57.549: [JPEG XS] Total frames: 887, Dropped: 0
+15:48:57.549: [JPEG XS] Decoder Disconnected: Receive failed: Connection was broken
+15:48:57.561: [JPEG XS] Output stream stopped
+15:48:57.561: [JPEG XS] Destroying output instance
+15:48:57.561: [JPEG XS UI] Stream stopped
+15:49:02.982: [JPEG XS] Creating output instance
+15:49:02.982: [JPEG XS] Settings updated: srt://172.25.33.162:9000?mode=caller, Ratio 100.0:1, latency 20 ms
+15:49:02.982: [JPEG XS UI] Media set to main video/audio
+15:49:02.982: [JPEG XS] Starting output stream
+15:49:02.982: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:49:02.982: [JPEG XS] Bitrate: 0.00 Mbps
+15:49:02.982: [JPEG XS] SRT URL: srt://172.25.33.162:9000?mode=caller
+15:49:02.982: [JPEG XS] Calculated Bitrate: 19.91 Mbps (Ratio 100.0:1 from 1990.66 Mbps)
+15:49:02.982: [JPEG XS] Video conversion set to I420
+15:49:02.984: [JPEG XS] Decoder Connected to SRT stream
+15:49:02.984: [JPEG XS] Encoder Connected to SRT destination
+15:49:02.984: [JPEG XS] Output stream started successfully
+15:49:02.984: [JPEG XS] Data capture started - waiting for frames...
+15:49:02.984: [JPEG XS UI] Stream started
+15:49:03.012: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:03.012: [JPEG XS] Frame 1: Encoded 41472 bytes, 30 packets
+15:49:03.028: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:03.028: [JPEG XS] Frame 2: Encoded 41472 bytes, 30 packets
+15:49:03.046: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:03.046: [JPEG XS] Frame 3: Encoded 41472 bytes, 30 packets
+15:49:03.062: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:03.063: [JPEG XS] Frame 4: Encoded 41472 bytes, 30 packets
+15:49:03.079: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:03.375: [JPEG XS] Decoded frame 960, Size: 41472 bytes
+15:49:03.993: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:03.996: [JPEG XS] Frame 60: Encoded 41472 bytes, 30 packets
+15:49:04.377: [JPEG XS] Decoded frame 1020, Size: 41472 bytes
+15:49:04.993: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:04.995: [JPEG XS] Frame 120: Encoded 41472 bytes, 30 packets
+15:49:05.377: [JPEG XS] Decoded frame 1080, Size: 41472 bytes
+15:49:05.993: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:05.996: [JPEG XS] Frame 180: Encoded 41472 bytes, 30 packets
+15:49:06.377: [JPEG XS] Decoded frame 1140, Size: 41472 bytes
+15:49:06.993: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:06.996: [JPEG XS] Frame 240: Encoded 41472 bytes, 30 packets
+15:49:07.377: [JPEG XS] Decoded frame 1200, Size: 41472 bytes
+15:49:07.552: [JPEG XS] Stopping output stream
+15:49:07.552: Output 'JPEG XS Stream': stopping
+15:49:07.552: Output 'JPEG XS Stream': Total frames output: 273
+15:49:07.552: Output 'JPEG XS Stream': Total drawn frames: 274
+15:49:07.552: [JPEG XS] Data capture stopped
+15:49:07.552: [JPEG XS] Total frames: 273, Dropped: 0
+15:49:07.561: [JPEG XS] Decoder Disconnected: Receive failed: Connection was broken
+15:49:07.564: [JPEG XS] Output stream stopped
+15:49:07.564: [JPEG XS] Destroying output instance
+15:49:07.564: [JPEG XS UI] Stream stopped
+15:49:18.011: [JPEG XS] Creating output instance
+15:49:18.011: [JPEG XS] Settings updated: srt://172.25.33.162:9000?mode=caller, Ratio 100.0:1, latency 20 ms
+15:49:18.011: [JPEG XS UI] Media set to main video/audio
+15:49:18.011: [JPEG XS] Starting output stream
+15:49:18.011: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:49:18.011: [JPEG XS] Bitrate: 0.00 Mbps
+15:49:18.011: [JPEG XS] SRT URL: srt://172.25.33.162:9000?mode=caller
+15:49:18.011: [JPEG XS] Calculated Bitrate: 19.91 Mbps (Ratio 100.0:1 from 1990.66 Mbps)
+15:49:18.011: [JPEG XS] Video conversion set to I420
+15:49:18.013: [JPEG XS] Decoder Connected to SRT stream
+15:49:18.013: [JPEG XS] Encoder Connected to SRT destination
+15:49:18.013: [JPEG XS] Output stream started successfully
+15:49:18.013: [JPEG XS] Data capture started - waiting for frames...
+15:49:18.014: [JPEG XS UI] Stream started
+15:49:18.046: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:18.046: [JPEG XS] Frame 1: Encoded 41472 bytes, 30 packets
+15:49:18.062: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:18.062: [JPEG XS] Frame 2: Encoded 41472 bytes, 30 packets
+15:49:18.079: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:18.079: [JPEG XS] Frame 3: Encoded 41472 bytes, 30 packets
+15:49:18.095: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:18.095: [JPEG XS] Frame 4: Encoded 41472 bytes, 30 packets
+15:49:18.112: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:18.878: [JPEG XS] Decoded frame 1260, Size: 41472 bytes
+15:49:19.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:19.029: [JPEG XS] Frame 60: Encoded 41472 bytes, 30 packets
+15:49:19.877: [JPEG XS] Decoded frame 1320, Size: 41472 bytes
+15:49:20.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:20.029: [JPEG XS] Frame 120: Encoded 41472 bytes, 30 packets
+15:49:20.877: [JPEG XS] Decoded frame 1380, Size: 41472 bytes
+15:49:21.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:21.029: [JPEG XS] Frame 180: Encoded 41472 bytes, 30 packets
+15:49:21.877: [JPEG XS] Decoded frame 1440, Size: 41472 bytes
+15:49:22.027: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:22.029: [JPEG XS] Frame 240: Encoded 41472 bytes, 30 packets
+15:49:22.877: [JPEG XS] Decoded frame 1500, Size: 41472 bytes
+15:49:23.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:23.029: [JPEG XS] Frame 300: Encoded 41472 bytes, 30 packets
+15:49:23.877: [JPEG XS] Decoded frame 1560, Size: 41472 bytes
+15:49:24.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:24.029: [JPEG XS] Frame 360: Encoded 41472 bytes, 30 packets
+15:49:24.878: [JPEG XS] Decoded frame 1620, Size: 41472 bytes
+15:49:25.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:25.029: [JPEG XS] Frame 420: Encoded 41472 bytes, 30 packets
+15:49:25.876: [JPEG XS] Decoded frame 1680, Size: 41472 bytes
+15:49:26.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:26.029: [JPEG XS] Frame 480: Encoded 41472 bytes, 30 packets
+15:49:26.877: [JPEG XS] Decoded frame 1740, Size: 41472 bytes
+15:49:27.026: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:27.029: [JPEG XS] Frame 540: Encoded 41472 bytes, 30 packets
+15:49:27.181: [JPEG XS] Stopping output stream
+15:49:27.181: Output 'JPEG XS Stream': stopping
+15:49:27.181: Output 'JPEG XS Stream': Total frames output: 549
+15:49:27.181: Output 'JPEG XS Stream': Total drawn frames: 550
+15:49:27.181: [JPEG XS] Data capture stopped
+15:49:27.181: [JPEG XS] Total frames: 549, Dropped: 0
+15:49:27.182: [JPEG XS] Decoder Disconnected: Receive failed: Connection was broken
+15:49:27.193: [JPEG XS] Output stream stopped
+15:49:27.193: [JPEG XS] Destroying output instance
+15:49:27.194: [JPEG XS UI] Stream stopped
+15:49:27.663: [JPEG XS] Creating output instance
+15:49:27.663: [JPEG XS] Settings updated: srt://172.25.33.162:9000?mode=caller, Ratio 10.0:1, latency 20 ms
+15:49:27.663: [JPEG XS UI] Media set to main video/audio
+15:49:27.663: [JPEG XS] Starting output stream
+15:49:27.663: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:49:27.663: [JPEG XS] Bitrate: 0.00 Mbps
+15:49:27.663: [JPEG XS] SRT URL: srt://172.25.33.162:9000?mode=caller
+15:49:27.663: [JPEG XS] Calculated Bitrate: 199.07 Mbps (Ratio 10.0:1 from 1990.66 Mbps)
+15:49:27.663: [JPEG XS] Video conversion set to I420
+15:49:27.665: [JPEG XS] Decoder Connected to SRT stream
+15:49:27.665: [JPEG XS] Encoder Connected to SRT destination
+15:49:27.665: [JPEG XS] Output stream started successfully
+15:49:27.665: [JPEG XS] Data capture started - waiting for frames...
+15:49:27.666: [JPEG XS UI] Stream started
+15:49:27.696: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:27.697: [JPEG XS] Frame 1: Encoded 414720 bytes, 297 packets
+15:49:27.713: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:27.713: [JPEG XS] Frame 2: Encoded 414720 bytes, 297 packets
+15:49:27.730: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:27.730: [JPEG XS] Frame 3: Encoded 414720 bytes, 297 packets
+15:49:27.746: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:27.746: [JPEG XS] Frame 4: Encoded 414720 bytes, 297 packets
+15:49:27.763: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:28.411: [JPEG XS] Decoded frame 1800, Size: 414720 bytes
+15:49:28.676: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:28.680: [JPEG XS] Frame 60: Encoded 414720 bytes, 297 packets
+15:49:29.413: [JPEG XS] Decoded frame 1860, Size: 414720 bytes
+15:49:29.676: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:29.680: [JPEG XS] Frame 120: Encoded 414720 bytes, 297 packets
+15:49:30.412: [JPEG XS] Decoded frame 1920, Size: 414720 bytes
+15:49:30.676: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:30.680: [JPEG XS] Frame 180: Encoded 414720 bytes, 297 packets
+15:49:30.700: [JPEG XS] Stopping output stream
+15:49:30.700: Output 'JPEG XS Stream': stopping
+15:49:30.700: Output 'JPEG XS Stream': Total frames output: 181
+15:49:30.700: Output 'JPEG XS Stream': Total drawn frames: 182
+15:49:30.700: [JPEG XS] Data capture stopped
+15:49:30.700: [JPEG XS] Total frames: 181, Dropped: 0
+15:49:30.700: [JPEG XS] Decoder Disconnected: Receive failed: Connection was broken
+15:49:30.711: [JPEG XS] Output stream stopped
+15:49:30.711: [JPEG XS] Destroying output instance
+15:49:30.711: [JPEG XS UI] Stream stopped
+15:49:33.728: [JPEG XS] Creating output instance
+15:49:33.728: [JPEG XS] Settings updated: srt://172.25.33.162:9000?mode=caller, Ratio 5.0:1, latency 20 ms
+15:49:33.728: [JPEG XS UI] Media set to main video/audio
+15:49:33.728: [JPEG XS] Starting output stream
+15:49:33.728: [JPEG XS] Resolution: 1920x1080 @ 60.00 fps
+15:49:33.728: [JPEG XS] Bitrate: 0.00 Mbps
+15:49:33.728: [JPEG XS] SRT URL: srt://172.25.33.162:9000?mode=caller
+15:49:33.728: [JPEG XS] Calculated Bitrate: 398.13 Mbps (Ratio 5.0:1 from 1990.66 Mbps)
+15:49:33.728: [JPEG XS] Video conversion set to I420
+15:49:33.730: [JPEG XS] Decoder Connected to SRT stream
+15:49:33.730: [JPEG XS] Encoder Connected to SRT destination
+15:49:33.730: [JPEG XS] Output stream started successfully
+15:49:33.730: [JPEG XS] Data capture started - waiting for frames...
+15:49:33.731: [JPEG XS UI] Stream started
+15:49:33.764: [JpegXSEncoder] Frame 1, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:33.764: [JPEG XS] Frame 1: Encoded 829440 bytes, 593 packets
+15:49:33.780: [JpegXSEncoder] Frame 2, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:33.781: [JPEG XS] Frame 2: Encoded 829440 bytes, 593 packets
+15:49:33.797: [JpegXSEncoder] Frame 3, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:33.797: [JPEG XS] Frame 3: Encoded 829440 bytes, 593 packets
+15:49:33.813: [JpegXSEncoder] Frame 4, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:33.814: [JPEG XS] Frame 4: Encoded 829440 bytes, 593 packets
+15:49:33.830: [JpegXSEncoder] Frame 5, Packet Bytes: FF 10 FF 50 00 04 08 80
+15:49:34.495: [JPEG XS] Decoded frame 1980, Size: 829440 bytes
+15:49:34.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:34.747: [JPEG XS] Frame 60: Encoded 829440 bytes, 593 packets
+15:49:35.496: [JPEG XS] Decoded frame 2040, Size: 829440 bytes
+15:49:35.618: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:35.618: [JPEG XS] Failed to decode frame 2047
+15:49:35.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:35.747: [JPEG XS] Frame 120: Encoded 829440 bytes, 593 packets
+15:49:36.518: [JPEG XS] Decoded frame 2100, Size: 829440 bytes
+15:49:36.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:36.748: [JPEG XS] Frame 180: Encoded 829440 bytes, 593 packets
+15:49:37.469: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:37.469: [JPEG XS] Failed to decode frame 2157
+15:49:37.535: [JPEG XS] Decoded frame 2160, Size: 829440 bytes
+15:49:37.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:37.749: [JPEG XS] Frame 240: Encoded 829440 bytes, 593 packets
+15:49:38.536: [JPEG XS] Decoded frame 2220, Size: 829440 bytes
+15:49:38.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:38.748: [JPEG XS] Frame 300: Encoded 829440 bytes, 593 packets
+15:49:39.322: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:39.322: [JPEG XS] Failed to decode frame 2266
+15:49:39.552: [JPEG XS] Decoded frame 2280, Size: 829440 bytes
+15:49:39.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:39.748: [JPEG XS] Frame 360: Encoded 829440 bytes, 593 packets
+15:49:40.549: [JPEG XS] Decoded frame 2340, Size: 829440 bytes
+15:49:40.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:40.747: [JPEG XS] Frame 420: Encoded 829440 bytes, 593 packets
+15:49:41.152: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:41.152: [JPEG XS] Failed to decode frame 2376
+15:49:41.570: [JPEG XS] Decoded frame 2400, Size: 829440 bytes
+15:49:41.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:41.748: [JPEG XS] Frame 480: Encoded 829440 bytes, 593 packets
+15:49:42.567: [JPEG XS] Decoded frame 2460, Size: 829440 bytes
+15:49:42.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:42.748: [JPEG XS] Frame 540: Encoded 829440 bytes, 593 packets
+15:49:42.986: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:42.986: [JPEG XS] Failed to decode frame 2485
+15:49:43.585: [JPEG XS] Decoded frame 2520, Size: 829440 bytes
+15:49:43.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:43.748: [JPEG XS] Frame 600: Encoded 829440 bytes, 593 packets
+15:49:44.584: [JPEG XS] Decoded frame 2580, Size: 829440 bytes
+15:49:44.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:44.748: [JPEG XS] Frame 660: Encoded 829440 bytes, 593 packets
+15:49:44.836: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:44.836: [JPEG XS] Failed to decode frame 2595
+15:49:45.599: [JPEG XS] Decoded frame 2640, Size: 829440 bytes
+15:49:45.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:45.748: [JPEG XS] Frame 720: Encoded 829440 bytes, 593 packets
+15:49:46.598: [JPEG XS] Decoded frame 2700, Size: 829440 bytes
+15:49:46.670: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:46.670: [JPEG XS] Failed to decode frame 2704
+15:49:46.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:46.747: [JPEG XS] Frame 780: Encoded 829440 bytes, 593 packets
+15:49:47.616: [JPEG XS] Decoded frame 2760, Size: 829440 bytes
+15:49:47.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:47.748: [JPEG XS] Frame 840: Encoded 829440 bytes, 593 packets
+15:49:48.519: [JpegXSDecoder] get_frame failed with error 0x80003001
+15:49:48.519: [JPEG XS] Failed to decode frame 2814
+15:49:48.632: [JPEG XS] Decoded frame 2820, Size: 829440 bytes
+15:49:48.743: [JPEG XS] ENCODER INPUT CHECK Y: 10 10 10 10
+15:49:48.748: [JPEG XS] Frame 900: Encoded 829440 bytes, 593 packets

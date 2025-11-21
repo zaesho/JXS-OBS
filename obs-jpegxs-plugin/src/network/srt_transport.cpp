@@ -5,12 +5,12 @@
 
 namespace jpegxs {
 
-constexpr size_t SRT_BUFFER_SIZE = 1500;  // MTU-safe size
+constexpr size_t SRT_BUFFER_SIZE = 2048;  // Safer MTU size (Jumbo frames support)
 
 SRTTransport::SRTTransport(const Config& cfg)
     : config_(cfg)
-    , socket_(SRT_INVALID_SOCK)
-    , accept_socket_(SRT_INVALID_SOCK)
+    , connection_socket_(SRT_INVALID_SOCK)
+    , listener_socket_(SRT_INVALID_SOCK)
     , running_(false)
     , connected_(false) {
 }
@@ -46,6 +46,19 @@ bool SRTTransport::start() {
     running_ = true;
     
     if (config_.mode == Mode::CALLER) {
+        // Create socket for caller
+        connection_socket_ = srt_create_socket();
+        if (connection_socket_ == SRT_INVALID_SOCK) {
+            setError("Failed to create SRT socket");
+            return false;
+        }
+
+        if (!configureSRTSocket(connection_socket_)) {
+            srt_close(connection_socket_);
+            connection_socket_ = SRT_INVALID_SOCK;
+            return false;
+        }
+
         if (!connectCaller()) {
             running_ = false;
             cleanupSRT();
@@ -55,6 +68,19 @@ bool SRTTransport::start() {
         // Start receive thread
         recv_thread_ = std::make_unique<std::thread>(&SRTTransport::receiveLoop, this);
     } else {
+        // Create socket for listener
+        listener_socket_ = srt_create_socket();
+        if (listener_socket_ == SRT_INVALID_SOCK) {
+            setError("Failed to create SRT listener socket");
+            return false;
+        }
+
+        if (!configureSRTSocket(listener_socket_)) {
+            srt_close(listener_socket_);
+            listener_socket_ = SRT_INVALID_SOCK;
+            return false;
+        }
+
         if (!startListener()) {
             running_ = false;
             cleanupSRT();
@@ -72,18 +98,29 @@ void SRTTransport::stop() {
     running_ = false;
     connected_ = false;
     
+    // Close sockets FIRST to unblock recv/accept calls
+    cleanupSRT();
+    
     if (recv_thread_ && recv_thread_->joinable()) {
-        recv_thread_->join();
+        // Check if we are joining the current thread (should not happen in normal usage but possible)
+        if (recv_thread_->get_id() != std::this_thread::get_id()) {
+            recv_thread_->join();
+        } else {
+            // Detach if we are stopping from within the thread (e.g. error callback)
+            recv_thread_->detach();
+        }
     }
     
     if (accept_thread_ && accept_thread_->joinable()) {
-        accept_thread_->join();
+        if (accept_thread_->get_id() != std::this_thread::get_id()) {
+            accept_thread_->join();
+        } else {
+            accept_thread_->detach();
+        }
     }
     
     recv_thread_.reset();
     accept_thread_.reset();
-    
-    cleanupSRT();
 }
 
 bool SRTTransport::isConnected() const {
@@ -91,13 +128,18 @@ bool SRTTransport::isConnected() const {
 }
 
 bool SRTTransport::send(const uint8_t* data, size_t size) {
-    if (!connected_ || socket_ == SRT_INVALID_SOCK) {
+    // Atomic read of connection socket
+    SRTSOCKET sock = connection_socket_;
+    
+    if (!connected_ || sock == SRT_INVALID_SOCK) {
         return false;
     }
     
-    int sent = srt_send(socket_, reinterpret_cast<const char*>(data), static_cast<int>(size));
+    int sent = srt_send(sock, reinterpret_cast<const char*>(data), static_cast<int>(size));
     
     if (sent == SRT_ERROR) {
+        // Update last error but avoid locking if not needed (optimization)
+        // But for now, let's set it so caller can retrieve it
         setError(std::string("Send failed: ") + srt_getlasterror_str());
         return false;
     }
@@ -144,35 +186,38 @@ bool SRTTransport::initSRT() {
         }
         srt_initialized = true;
     }
-    
-    socket_ = srt_create_socket();
-    if (socket_ == SRT_INVALID_SOCK) {
-        setError("Failed to create SRT socket");
-        return false;
-    }
-    
-    if (!configureSRTSocket(socket_)) {
-        srt_close(socket_);
-        socket_ = SRT_INVALID_SOCK;
-        return false;
-    }
-    
     return true;
 }
 
 void SRTTransport::cleanupSRT() {
-    if (accept_socket_ != SRT_INVALID_SOCK) {
-        srt_close(accept_socket_);
-        accept_socket_ = SRT_INVALID_SOCK;
+    // Close listener socket
+    if (listener_socket_ != SRT_INVALID_SOCK) {
+        srt_close(listener_socket_);
+        listener_socket_ = SRT_INVALID_SOCK;
     }
     
-    if (socket_ != SRT_INVALID_SOCK) {
-        srt_close(socket_);
-        socket_ = SRT_INVALID_SOCK;
+    // Close connection socket
+    if (connection_socket_ != SRT_INVALID_SOCK) {
+        srt_close(connection_socket_);
+        connection_socket_ = SRT_INVALID_SOCK;
     }
 }
 
 bool SRTTransport::configureSRTSocket(SRTSOCKET sock) {
+    // Explicitly set Message API mode (Live)
+    int transtype = SRTT_LIVE;
+    if (srt_setsockopt(sock, 0, SRTO_TRANSTYPE, &transtype, sizeof(transtype)) != 0) {
+        setError("Failed to set SRTO_TRANSTYPE");
+        return false;
+    }
+
+    // Set payload size to be safe (default is 1316, we need slightly more for our RTP packets ~1300+Header)
+    int payload_size = 1456;
+    if (srt_setsockopt(sock, 0, SRTO_PAYLOADSIZE, &payload_size, sizeof(payload_size)) != 0) {
+        setError("Failed to set SRTO_PAYLOADSIZE");
+        return false;
+    }
+
     // Set latency
     if (srt_setsockopt(sock, 0, SRTO_LATENCY, &config_.latency_ms, sizeof(config_.latency_ms)) != 0) {
         setError("Failed to set SRTO_LATENCY");
@@ -240,7 +285,7 @@ bool SRTTransport::connectCaller() {
         return false;
     }
     
-    if (srt_connect(socket_, reinterpret_cast<sockaddr*>(&sa), sizeof(sa)) == SRT_ERROR) {
+    if (srt_connect(connection_socket_, reinterpret_cast<sockaddr*>(&sa), sizeof(sa)) == SRT_ERROR) {
         setError(std::string("Connect failed: ") + srt_getlasterror_str());
         return false;
     }
@@ -262,12 +307,12 @@ bool SRTTransport::startListener() {
     sa.sin_port = htons(config_.port);
     sa.sin_addr.s_addr = INADDR_ANY;
     
-    if (srt_bind(socket_, reinterpret_cast<sockaddr*>(&sa), sizeof(sa)) == SRT_ERROR) {
+    if (srt_bind(listener_socket_, reinterpret_cast<sockaddr*>(&sa), sizeof(sa)) == SRT_ERROR) {
         setError(std::string("Bind failed: ") + srt_getlasterror_str());
         return false;
     }
     
-    if (srt_listen(socket_, 1) == SRT_ERROR) {
+    if (srt_listen(listener_socket_, 1) == SRT_ERROR) {
         setError(std::string("Listen failed: ") + srt_getlasterror_str());
         return false;
     }
@@ -279,83 +324,141 @@ void SRTTransport::receiveLoop() {
     uint8_t buffer[SRT_BUFFER_SIZE];
     
     while (running_) {
-        int received = srt_recv(socket_, reinterpret_cast<char*>(buffer), SRT_BUFFER_SIZE);
-        
-        if (received == SRT_ERROR) {
-            int error = srt_getlasterror(nullptr);
-            if (error != SRT_EASYNCRCV) {  // Ignore async receive timeout
-                setError(std::string("Receive failed: ") + srt_getlasterror_str());
-                connected_ = false;
-                stats_.connected = false;
-                
-                if (state_callback_) {
-                    state_callback_(false, last_error_);
-                }
-                
-                if (config_.enable_reconnect && config_.mode == Mode::CALLER) {
-                    std::this_thread::sleep_for(std::chrono::seconds(1));
-                    connectCaller();
-                }
+        try {
+            SRTSOCKET sock = connection_socket_;
+            
+            if (sock == SRT_INVALID_SOCK) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 continue;
             }
-        } else if (received > 0) {
-            stats_.bytes_received += received;
-            stats_.packets_received++;
+
+            int received = srt_recv(sock, reinterpret_cast<char*>(buffer), SRT_BUFFER_SIZE);
             
-            if (data_callback_) {
-                data_callback_(buffer, static_cast<size_t>(received));
+            if (received == SRT_ERROR) {
+                int error = srt_getlasterror(nullptr);
+                if (error != SRT_EASYNCRCV) {  // Ignore async receive timeout
+                    // Only report error if we didn't intentionally close the socket
+                    if (running_ && connection_socket_ == sock) {
+                        setError(std::string("Receive failed: ") + srt_getlasterror_str());
+                        connected_ = false;
+                        stats_.connected = false;
+                        
+                        if (state_callback_) {
+                            state_callback_(false, last_error_);
+                        }
+                        
+                        if (config_.mode == Mode::CALLER && config_.enable_reconnect) {
+                            // Reconnect logic for caller
+                            srt_close(connection_socket_);
+                            connection_socket_ = srt_create_socket();
+                            configureSRTSocket(connection_socket_);
+                            
+                            std::this_thread::sleep_for(std::chrono::seconds(1));
+                            if (running_) {
+                                connectCaller();
+                            }
+                        } else if (config_.mode == Mode::LISTENER) {
+                            // Listener logic: Close connection and wait for new one
+                            {
+                                std::lock_guard<std::mutex> lock(mutex_);
+                                if (connection_socket_ == sock) {
+                                    srt_close(connection_socket_);
+                                    connection_socket_ = SRT_INVALID_SOCK;
+                                }
+                            }
+                            // Loop will continue, but sock check at top will sleep
+                        }
+                    } else if (connection_socket_ == SRT_INVALID_SOCK) {
+                        // Socket was closed, just wait
+                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    } else {
+                        // Socket ID mismatch (old socket), just wait
+                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    }
+                }
+            } else if (received > 0) {
+                stats_.bytes_received += received;
+                stats_.packets_received++;
+                
+                if (data_callback_) {
+                    data_callback_(buffer, static_cast<size_t>(received));
+                }
             }
-        }
-        
-        // Periodically update stats
-        static auto last_update = std::chrono::steady_clock::now();
-        auto now = std::chrono::steady_clock::now();
-        if (std::chrono::duration_cast<std::chrono::seconds>(now - last_update).count() >= 1) {
-            updateStats();
-            last_update = now;
+            
+            // Periodically update stats
+            static auto last_update = std::chrono::steady_clock::now();
+            auto now = std::chrono::steady_clock::now();
+            if (std::chrono::duration_cast<std::chrono::seconds>(now - last_update).count() >= 1) {
+                updateStats();
+                last_update = now;
+            }
+        } catch (const std::exception& e) {
+            setError(std::string("Exception in receiveLoop: ") + e.what());
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        } catch (...) {
+            setError("Unknown exception in receiveLoop");
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 }
 
 void SRTTransport::acceptLoop() {
     while (running_) {
-        sockaddr_storage client_addr;
-        int addr_len = sizeof(client_addr);
-        
-        SRTSOCKET client_sock = srt_accept(socket_, reinterpret_cast<sockaddr*>(&client_addr), &addr_len);
-        
-        if (client_sock == SRT_INVALID_SOCK) {
-            continue;
-        }
-        
-        // Close previous client if any
-        if (accept_socket_ != SRT_INVALID_SOCK) {
-            srt_close(accept_socket_);
-        }
-        
-        accept_socket_ = client_sock;
-        socket_ = client_sock;  // Use accepted socket for communication
-        connected_ = true;
-        stats_.connected = true;
-        
-        if (state_callback_) {
-            state_callback_(true, "");
-        }
-        
-        // Start receive loop
-        if (!recv_thread_) {
-            recv_thread_ = std::make_unique<std::thread>(&SRTTransport::receiveLoop, this);
+        try {
+            sockaddr_storage client_addr;
+            int addr_len = sizeof(client_addr);
+            
+            SRTSOCKET client_sock = srt_accept(listener_socket_, reinterpret_cast<sockaddr*>(&client_addr), &addr_len);
+            
+            if (client_sock == SRT_INVALID_SOCK) {
+                // If listener socket was closed, we should exit
+                if (!running_) break;
+                continue;
+            }
+            
+            // Configure the accepted socket
+            configureSRTSocket(client_sock);
+
+            // Thread-safe socket replacement
+            {
+                std::lock_guard<std::mutex> lock(mutex_);
+                
+                // Close previous client if any
+                if (connection_socket_ != SRT_INVALID_SOCK) {
+                    srt_close(connection_socket_);
+                }
+                
+                connection_socket_ = client_sock;
+                connected_ = true;
+                stats_.connected = true;
+            }
+            
+            if (state_callback_) {
+                state_callback_(true, "");
+            }
+            
+            // Start receive loop if not already running
+            if (!recv_thread_) {
+                recv_thread_ = std::make_unique<std::thread>(&SRTTransport::receiveLoop, this);
+            }
+        } catch (const std::exception& e) {
+            setError(std::string("Exception in acceptLoop: ") + e.what());
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        } catch (...) {
+            setError("Unknown exception in acceptLoop");
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 }
 
 void SRTTransport::updateStats() {
-    if (socket_ == SRT_INVALID_SOCK || !connected_) {
+    SRTSOCKET sock = connection_socket_;
+    if (sock == SRT_INVALID_SOCK || !connected_) {
         return;
     }
     
     SRT_TRACEBSTATS stats;
-    if (srt_bistats(socket_, &stats, 0, 1) == 0) {
+    if (srt_bistats(sock, &stats, 0, 1) == 0) {
         std::lock_guard<std::mutex> lock(mutex_);
         
         stats_.packets_lost = stats.pktRcvLoss;

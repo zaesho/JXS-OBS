@@ -28,7 +28,7 @@ public:
      */
     bool initialize(uint32_t width, uint32_t height, 
                    uint32_t fps_num, uint32_t fps_den,
-                   float bitrate_mbps);
+                   float bitrate_mbps, uint32_t threads_num = 0);
     
     /**
      * Encode a video frame
@@ -70,6 +70,10 @@ private:
     uint32_t fps_num_;
     uint32_t fps_den_;
     float bitrate_mbps_;
+    uint32_t threads_num_;
+    
+    // Reusable buffer for bitstream
+    std::vector<uint8_t> bitstream_buffer_;
     
     // Statistics
     Stats stats_;

@@ -94,8 +94,8 @@ public:
     
 private:
     Config config_;
-    SRTSOCKET socket_;
-    SRTSOCKET accept_socket_;  // For listener mode
+    SRTSOCKET connection_socket_; // Active data connection
+    SRTSOCKET listener_socket_;   // For listener mode (server)
     std::atomic<bool> running_;
     std::atomic<bool> connected_;
     

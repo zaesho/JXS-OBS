@@ -77,7 +77,7 @@ private:
  */
 class RTPPacketizer {
 public:
-    RTPPacketizer(size_t max_payload_size = 1400);
+    RTPPacketizer(size_t max_payload_size = 1280);
     ~RTPPacketizer();
     
     // Configure packetizer
