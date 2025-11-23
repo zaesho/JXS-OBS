@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(obs-jpegxs-plugin VERSION 0.1.0)
+project(obs-jpegxs-plugin VERSION 0.1.1)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -66,6 +66,7 @@ if(WIN32)
         list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.5.3/msvc2019_64")
     endif()
     
+    set(CMAKE_PREFIX_PATH "/Applications/OBS.app/Contents/Frameworks" ${CMAKE_PREFIX_PATH})
     find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
     message(STATUS "Found Qt6: ${Qt6_VERSION}")
 
@@ -75,6 +76,9 @@ else()
     
     # Find SVT-JPEG-XS (optional for development build)
     pkg_check_modules(SVTJPEGXS SvtJpegxs)
+    if(SVTJPEGXS_FOUND)
+        link_directories(${SVTJPEGXS_LIBRARY_DIRS})
+    endif()
     if(NOT SVTJPEGXS_FOUND)
         message(WARNING "SVT-JPEG-XS not found - building skeleton only")
         message(WARNING "The plugin will compile but encoder/decoder will be stubs")
@@ -99,7 +103,10 @@ else()
     message(STATUS "SRT include dir: ${SRT_INCLUDE_DIR}")
     
     # Find Qt6 on macOS/Linux (assuming system install or environment variable)
+    # set(CMAKE_PREFIX_PATH "/Applications/OBS.app/Contents/Frameworks" ${CMAKE_PREFIX_PATH})
     find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
+
+    # Previous override removed
 endif()
 
 # OBS headers from source tree
@@ -217,7 +224,7 @@ if(BUILD_ENCODER)
         set_target_properties(obs-jpegxs-output PROPERTIES
             PREFIX ""
             OUTPUT_NAME "obs-jpegxs-output"
-            SUFFIX ".so"
+            BUNDLE_EXTENSION "plugin"
             BUNDLE TRUE
             MACOSX_BUNDLE_INFO_PLIST ""
             LINK_FLAGS "-undefined dynamic_lookup"
@@ -232,7 +239,16 @@ if(BUILD_ENCODER)
     # Installation - macOS plugin path
     if(APPLE)
         install(TARGETS obs-jpegxs-output
-            LIBRARY DESTINATION "$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-output/bin")
+            LIBRARY DESTINATION "$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-output.plugin/Contents/MacOS"
+            NAMELINK_SKIP
+        )
+        # Copy the whole bundle structure
+        install(CODE "
+            execute_process(COMMAND \${CMAKE_COMMAND} -E copy_directory
+                \"\${CMAKE_CURRENT_BINARY_DIR}/obs-jpegxs-output.plugin\"
+                \"$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-output.plugin\"
+            )
+        ")
     else()
         install(TARGETS obs-jpegxs-output
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/obs-plugins
@@ -253,13 +269,19 @@ if(BUILD_DECODER)
     add_library(obs-jpegxs-input MODULE ${DECODER_SOURCES})
     
     # Link libraries
+    # Link libraries
+    # Link libraries
     target_link_libraries(obs-jpegxs-input
         ${SVTJPEGXS_LIBRARIES}
         ${SRT_LIBRARY}
+        Qt6::Core
+        Qt6::Widgets
+        Qt6::Gui
     )
     
     # Platform-specific linking
     target_compile_definitions(obs-jpegxs-input PRIVATE
+        SIMDE_ENABLE_NATIVE_ALIASES
         OBS_PLUGIN_VERSION="${PROJECT_VERSION}"
     )
 
@@ -293,7 +315,7 @@ if(BUILD_DECODER)
         set_target_properties(obs-jpegxs-input PROPERTIES
             PREFIX ""
             OUTPUT_NAME "obs-jpegxs-input"
-            SUFFIX ".so"
+            BUNDLE_EXTENSION "plugin"
             BUNDLE TRUE
             MACOSX_BUNDLE_INFO_PLIST ""
             LINK_FLAGS "-undefined dynamic_lookup"
@@ -308,7 +330,16 @@ if(BUILD_DECODER)
     # Installation - macOS plugin path
     if(APPLE)
         install(TARGETS obs-jpegxs-input
-            LIBRARY DESTINATION "$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-input/bin")
+            LIBRARY DESTINATION "$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-input.plugin/Contents/MacOS"
+            NAMELINK_SKIP
+        )
+        # Copy the whole bundle structure
+        install(CODE "
+            execute_process(COMMAND \${CMAKE_COMMAND} -E copy_directory
+                \"\${CMAKE_CURRENT_BINARY_DIR}/obs-jpegxs-input.plugin\"
+                \"$ENV{HOME}/Library/Application Support/obs-studio/plugins/obs-jpegxs-input.plugin\"
+            )
+        ")
     else()
         install(TARGETS obs-jpegxs-input
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/obs-plugins
@@ -319,12 +350,12 @@ endif()
 # macOS specific settings
 if(APPLE)
     set_target_properties(obs-jpegxs-output PROPERTIES
-        INSTALL_RPATH "@loader_path/"
+        INSTALL_RPATH "@loader_path;@loader_path/../../../../../../../../../../Applications/OBS.app/Contents/Frameworks"
         BUILD_WITH_INSTALL_RPATH TRUE
     )
     if(BUILD_DECODER)
         set_target_properties(obs-jpegxs-input PROPERTIES
-            INSTALL_RPATH "@loader_path/"
+            INSTALL_RPATH "@loader_path;@loader_path/../../../../../../../../../../Applications/OBS.app/Contents/Frameworks"
             BUILD_WITH_INSTALL_RPATH TRUE
         )
     endif()

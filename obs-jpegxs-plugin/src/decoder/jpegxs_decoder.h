@@ -30,13 +30,19 @@ public:
     
     /**
      * Decode a JPEG XS frame
-     * @param input Encoded JPEG XS data
-     * @param yuv_planes Output YUV plane pointers (allocated by caller)
-     * @param linesize Output line sizes for each plane
+     * @param input_data Pointer to encoded JPEG XS data
+     * @param input_size Size of encoded data
+     * @param yuv_planes Output YUV plane pointers (optional, pass nullptr to use internal buffers)
+     * @param linesize Output line sizes for each plane (optional if yuv_planes is nullptr)
      * @return true on success
      */
-    bool decode_frame(const std::vector<uint8_t> &input,
-                     uint8_t *yuv_planes[3], uint32_t linesize[3]);
+    bool decode_frame(const uint8_t* input_data, size_t input_size,
+                     uint8_t *yuv_planes[3] = nullptr, uint32_t linesize[3] = nullptr);
+    
+    // Access to internal buffers (valid until next decode)
+    const uint8_t* get_y_buffer() const { return buffer_y_; }
+    const uint8_t* get_u_buffer() const { return buffer_u_; }
+    const uint8_t* get_v_buffer() const { return buffer_v_; }
     
     /**
      * Get frame dimensions (after decoding first frame)
@@ -49,6 +55,8 @@ public:
     // Getters
     uint32_t getWidth() const { return width_; }
     uint32_t getHeight() const { return height_; }
+    uint8_t getBitDepth() const { return bit_depth_; }
+    int getFormat() const { return format_; }
     
     /**
      * Get decoder statistics
@@ -68,12 +76,18 @@ private:
     // Configuration
     uint32_t width_;
     uint32_t height_;
+    uint8_t bit_depth_;
+    int format_; // ColourFormat_t
     bool first_frame_;
     
     // Internal persistent buffers to avoid use-after-free in threaded decoder
-    std::vector<uint8_t> buffer_y_;
-    std::vector<uint8_t> buffer_u_;
-    std::vector<uint8_t> buffer_v_;
+    // We manage these manually to ensure 64-byte alignment for SVT-JPEG-XS
+    uint8_t* buffer_y_ = nullptr;
+    uint8_t* buffer_u_ = nullptr;
+    uint8_t* buffer_v_ = nullptr;
+    size_t buffer_y_size_ = 0;
+    size_t buffer_u_size_ = 0;
+    size_t buffer_v_size_ = 0;
     
     // Statistics
     Stats stats_;

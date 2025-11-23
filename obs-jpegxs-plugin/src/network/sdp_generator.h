@@ -22,8 +22,18 @@ struct SDPConfig {
     // JPEG XS specifics
     // profile-level-id? 
     // packetization-mode?
-    // sampling? (e.g. "YCbCr-4:2:0")
-    // depth? (e.g. 10)
+    std::string sampling = "YCbCr-4:2:0"; // "YCbCr-4:2:0" or "YCbCr-4:4:4"
+    uint8_t depth = 8;
+    
+    bool use_aws_compatibility = false; // Enables jxsv payload and extra attributes
+    
+    // Audio Configuration
+    bool audio_enabled = false;
+    uint16_t audio_dest_port = 0;
+    uint8_t audio_channels = 2;
+    uint8_t audio_bit_depth = 16; // 16 or 24
+    uint32_t audio_sample_rate = 48000;
+    uint8_t audio_payload_type = 97;
 };
 
 class SDPGenerator {

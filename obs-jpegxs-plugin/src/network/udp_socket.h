@@ -34,11 +34,17 @@ public:
     // Bind to a local port (for receiving)
     bool bind(uint16_t port, const std::string& interface_ip = "0.0.0.0");
 
+    // Connect to a destination (enables send() optimization)
+    bool connect(const std::string& dest_ip, uint16_t dest_port);
+
     // Join a multicast group
     bool joinMulticast(const std::string& multicast_ip, const std::string& interface_ip = "0.0.0.0");
 
     // Send data to a specific destination
     bool sendTo(const uint8_t* data, size_t size, const std::string& dest_ip, uint16_t dest_port);
+
+    // Send to connected address
+    bool send(const uint8_t* data, size_t size);
 
     // Receive data (blocking or non-blocking depending on setup)
     // Returns bytes received, or -1 on error, 0 on shutdown/empty

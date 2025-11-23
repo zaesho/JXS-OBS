@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 #include <memory>
+#include <functional>
 
 namespace jpegxs {
 
@@ -58,6 +59,10 @@ public:
     // Utility
     static uint32_t generateSSRC();
     
+    // Deserialize header from buffer (Public)
+    static bool deserializeHeader(const uint8_t* buffer, size_t size, Header& header);
+    static bool deserializePayloadHeader(const uint8_t* buffer, size_t size, JPEGXSPayloadHeader& payload_header);
+    
 private:
     Header header_;
     JPEGXSPayloadHeader payload_header_;
@@ -66,10 +71,6 @@ private:
     // Serialize header to buffer
     void serializeHeader(uint8_t* buffer) const;
     void serializePayloadHeader(uint8_t* buffer) const;
-    
-    // Deserialize header from buffer
-    static bool deserializeHeader(const uint8_t* buffer, size_t size, Header& header);
-    static bool deserializePayloadHeader(const uint8_t* buffer, size_t size, JPEGXSPayloadHeader& payload_header);
 };
 
 /**
@@ -86,12 +87,15 @@ public:
     void setSliceHeight(uint16_t height);
     void setMaxPayloadSize(size_t size);  // MTU consideration
     
-    // Packetize JPEG XS encoded frame/slice
-    std::vector<std::unique_ptr<RTPPacket>> packetize(
+    using PacketCallback = std::function<void(const uint8_t* data, size_t size)>;
+
+    // Packetize JPEG XS encoded frame/slice with zero-copy callback
+    void packetize(
         const uint8_t* jpegxs_data,
         size_t data_size,
         uint32_t timestamp,
-        bool is_last_slice_in_frame
+        bool is_last_slice_in_frame,
+        PacketCallback callback
     );
     
     // Reset sequence number (on stream restart)
@@ -103,6 +107,8 @@ private:
     uint16_t sequence_number_;
     uint16_t slice_height_;
     size_t max_payload_size_;
+    
+    std::vector<uint8_t> scratch_buffer_;
 };
 
 /**
@@ -119,11 +125,15 @@ public:
     // Check if complete frame is ready
     bool isFrameReady() const;
     
-    // Get assembled frame data
-    std::vector<uint8_t> getFrameData();
+    // Get assembled frame data (zero-copy)
+    // Returns pointer to internal buffer and its size
+    const uint8_t* getFrameData(size_t& size) const;
     
     // Reset state
     void reset();
+    
+    // Get current frame timestamp (RTP 90kHz)
+    uint32_t getCurrentTimestamp() const { return current_timestamp_; }
     
     // Statistics
     struct Stats {
@@ -138,14 +148,54 @@ public:
 private:
     struct PacketInfo {
         uint16_t sequence_number;
-        std::vector<uint8_t> payload;
-        bool received;
+        size_t offset;
+        size_t size;
+        // We store packets linearly in a large buffer to avoid fragmentation
     };
     
-    std::vector<PacketInfo> packet_buffer_;
+    // Reassembly buffer
+    std::vector<uint8_t> buffer_;
+    size_t buffer_used_ = 0;
+    
+    // To track packet ordering/gaps, we might need metadata
+    // But to be zero-copy, we should try to place payloads directly?
+    // Hard without knowing offset. JPEG XS RTP doesn't send byte offset for codestream mode usually.
+    // We just append packets in sequence order.
+    // So we need to store them temporarily until frame is complete, then sort/linearize?
+    // Or just store pointers/offsets if we keep the original packet data?
+    // But processPacket takes raw bytes.
+    
+    // Optimization:
+    // We can't easily zero-copy receive unless we read directly into a large buffer.
+    // But UDPSocket reads into a packet buffer.
+    // So we must copy at least once to assemble the frame.
+    // We can optimize by having a large pre-allocated frame buffer and copying packet payloads into it.
+    // We need to handle out-of-order packets.
+    
+    // Let's store packets in a list, then flatten.
+    // To avoid allocation per packet, we can reuse a pool of packet buffers?
+    // Or just optimize the vector return which is the biggest offender.
+    
+    struct PacketData {
+        uint16_t seq;
+        std::vector<uint8_t> payload; 
+    };
+    
+    // Packet pool to avoid allocations
+    std::vector<PacketData> packet_pool_;
+    size_t pool_used_ = 0;
+    
+    // Indices to packets in pool for sorting (safe against pool resize)
+    std::vector<size_t> pending_packets_;
+    
+    // Frame buffer for output
+    mutable std::vector<uint8_t> frame_buffer_;
+    
     uint16_t expected_sequence_;
     uint32_t current_timestamp_;
     bool frame_started_;
+    bool discarding_frame_ = false;
+    bool waiting_for_start_ = true;
     Stats stats_;
     
     void assembleFrame();

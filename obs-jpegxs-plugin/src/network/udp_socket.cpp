@@ -31,8 +31,9 @@ bool UDPSocket::init() {
     // INCREASE DEFAULT KERNEL BUFFERS
     // This is critical for high-bandwidth video (100Mbps+).
     // Default is usually 64KB, which fills instantly during any jitter.
-    // Set to 8MB.
-    int buf_size = 8 * 1024 * 1024; 
+    // Set to 1MB (reduced from 8MB) to avoid bufferbloat and reduce latency accumulation.
+    // For strict ST 2110-22 low latency, smaller buffers force dropped packets instead of lag.
+    int buf_size = 1 * 1024 * 1024; 
     setsockopt(sock_, SOL_SOCKET, SO_RCVBUF, (const char*)&buf_size, sizeof(buf_size));
     setsockopt(sock_, SOL_SOCKET, SO_SNDBUF, (const char*)&buf_size, sizeof(buf_size));
     
@@ -81,6 +82,24 @@ bool UDPSocket::bind(uint16_t port, const std::string& interface_ip) {
     return true;
 }
 
+bool UDPSocket::connect(const std::string& dest_ip, uint16_t dest_port) {
+    if (sock_ == INVALID_SOCKET) init();
+
+    sockaddr_in dest_addr;
+    std::memset(&dest_addr, 0, sizeof(dest_addr));
+    dest_addr.sin_family = AF_INET;
+    dest_addr.sin_port = htons(dest_port);
+    
+    if (inet_pton(AF_INET, dest_ip.c_str(), &dest_addr.sin_addr) <= 0) {
+        return false;
+    }
+
+    if (::connect(sock_, (struct sockaddr*)&dest_addr, sizeof(dest_addr)) == SOCKET_ERROR) {
+        return false;
+    }
+    return true;
+}
+
 bool UDPSocket::joinMulticast(const std::string& multicast_ip, const std::string& interface_ip) {
     if (sock_ == INVALID_SOCKET) return false;
 
@@ -113,6 +132,18 @@ bool UDPSocket::sendTo(const uint8_t* data, size_t size, const std::string& dest
     }
 
     int sent = sendto(sock_, (const char*)data, (int)size, 0, (struct sockaddr*)&dest_addr, sizeof(dest_addr));
+    return sent == (int)size;
+}
+
+bool UDPSocket::send(const uint8_t* data, size_t size) {
+    if (sock_ == INVALID_SOCKET) return false;
+    
+    // send() uses the connected address
+#ifdef _WIN32
+    int sent = ::send(sock_, (const char*)data, (int)size, 0);
+#else
+    int sent = ::send(sock_, data, size, 0);
+#endif
     return sent == (int)size;
 }
 

@@ -18,8 +18,9 @@ std::string SDPGenerator::generate(const SDPConfig& config) {
     ss << "t=0 0\r\n";
     
     // Video Media Description
+    std::string payload_name = config.use_aws_compatibility ? "jxsv" : "JPEGXS";
     ss << "m=video " << config.dest_port << " RTP/AVP " << (int)config.payload_type << "\r\n";
-    ss << "a=rtpmap:" << (int)config.payload_type << " JPEGXS/" << config.clock_rate << "\r\n";
+    ss << "a=rtpmap:" << (int)config.payload_type << " " << payload_name << "/" << config.clock_rate << "\r\n";
     
     // fmtp parameters (RFC 9134)
     ss << "a=fmtp:" << (int)config.payload_type << " ";
@@ -42,15 +43,10 @@ std::string SDPGenerator::generate(const SDPConfig& config) {
     // exactframerate=60
     // colorimetry=BT709
     
-    ss << "sampling=YCbCr-4:2:2; "; // We are sending 4:2:2 or 4:2:0? The encoder converts to I420 (4:2:0) currently.
-                                    // But Elemental might prefer 4:2:2. 
-                                    // The whitepaper says "4:2:2 chroma". 
-                                    // We should probably update the encoder to 4:2:2 later, but for now stick to what we output.
-                                    // Wait, obs_jpegxs_output.cpp forces I420 (4:2:0).
-                                    // Let's claim 4:2:0 for now.
+    ss << "sampling=" << config.sampling << "; ";
     ss << "width=" << config.width << "; ";
     ss << "height=" << config.height << "; ";
-    ss << "depth=8; "; // OBS usually outputs 8-bit unless HDR.
+    ss << "depth=" << (int)config.depth << "; ";
     
     // exactframerate
     if (config.fps_den > 0) {
@@ -59,11 +55,28 @@ std::string SDPGenerator::generate(const SDPConfig& config) {
     
     ss << "colorimetry=BT709"; 
     
+    if (config.use_aws_compatibility) {
+        ss << "; TP=2110TPN; TCS=SDR; PM=2110GPM; SSN=ST2110-22:2018; PAR=1:1";
+    }
+    
     ss << "\r\n";
     
     // a=mediaclk:direct=0 (PTP) - simplified
     ss << "a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00\r\n";
     ss << "a=mediaclk:direct=0\r\n";
+    
+    // Audio Media Description (ST 2110-30 / AES67)
+    if (config.audio_enabled && config.audio_dest_port > 0) {
+        std::string audio_fmt = (config.audio_bit_depth == 24) ? "L24" : "L16";
+        
+        ss << "m=audio " << config.audio_dest_port << " RTP/AVP " << (int)config.audio_payload_type << "\r\n";
+        ss << "c=IN IP4 " << config.dest_ip << "\r\n"; // Assume same IP for audio
+        ss << "a=rtpmap:" << (int)config.audio_payload_type << " " 
+           << audio_fmt << "/" << config.audio_sample_rate << "/" << (int)config.audio_channels << "\r\n";
+        ss << "a=ptime:1\r\n"; // 1ms packet time is standard for ST 2110-30 Class A/B/C
+        ss << "a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00\r\n";
+        ss << "a=mediaclk:direct=0\r\n";
+    }
 
     return ss.str();
 }
