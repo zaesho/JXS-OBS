@@ -1,7 +1,5 @@
 # JPEG XS Low-Latency Streaming Plugin for OBS Studio
 
-✅ **Status: PRODUCTION READY** - Windows x86_64 Build Complete
-
 A professional-grade, low-latency video streaming plugin for OBS Studio using JPEG XS compression and SRT transport protocol.
 
 ## 🎯 Project Goals Achieved
@@ -13,7 +11,7 @@ A professional-grade, low-latency video streaming plugin for OBS Studio using JP
 - ✅ Full Windows x86_64 support
 - ✅ OBS Studio plugin integration
 
-## 🚀 Quick Links
+## Quick Links
 
 - **[QUICK_START.md](QUICK_START.md)** - Installation and basic usage guide
 - **[BUILD_STATUS.md](BUILD_STATUS.md)** - Complete build documentation and technical details
@@ -48,21 +46,6 @@ A professional-grade, low-latency video streaming plugin for OBS Studio using JP
    - SRT transport with FEC and encryption
    - Configurable latency (10-200ms)
    - AES-128/192/256 encryption support
-
-## 💻 System Requirements
-
-### Minimum
-- Windows 10/11 (64-bit)
-- OBS Studio 30.x or later
-- Intel/AMD CPU with AVX2 support
-- 1 Gbps network for Full HD streaming
-- 8 GB RAM
-
-### Recommended
-- Windows 11 (64-bit)
-- Intel Core i7/i9 or AMD Ryzen 7/9 (8+ cores)
-- 10 Gbps network for 4K streaming
-- 16 GB RAM
 
 ## 🎥 Use Cases
 
